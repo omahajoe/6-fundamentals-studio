@@ -166,6 +166,12 @@ footer a:hover{text-decoration:underline}
     <textarea id="f1e" data-k="Why communicated consistently?"></textarea></div>
   <div class="q"><label for="f1f">4. Does your team share this vision and the numbers behind it?</label><div class="hint">Who isn't aligned yet?</div>
     <textarea id="f1f" data-k="Team alignment"></textarea></div>
+  <div class="q"><label for="f1g">5. Your annual priorities</label><div class="hint">The short list this year that everything else serves.</div>
+    <textarea id="f1g" data-k="Annual priorities"></textarea></div>
+  <div class="q"><label for="f1h">6. Firm-wide success metrics</label><div class="hint">What "winning" means — defined the same way by every leader.</div>
+    <textarea id="f1h" data-k="Success metrics"></textarea></div>
+  <div class="q"><label for="f1i">7. Strategic intent</label><div class="hint">Pivot, scale, hold, or exit?</div>
+    <input type="text" id="f1i" data-k="Strategic intent" placeholder="pivot / scale / hold / exit"></div>
 
   <details class="deeper">
     <summary><span class="tw">▸</span>Run this with AI — pressure-test your Destination Set</summary>
@@ -319,6 +325,8 @@ footer a:hover{text-decoration:underline}
     <textarea id="f5c" data-k="Rhythm"></textarea></div>
   <div class="q"><label for="f5d">4. Is your content and visibility cadence consistent or sporadic?</label><div class="hint">The market reads silence as a signal.</div>
     <textarea id="f5d" data-k="Content cadence"></textarea></div>
+  <div class="q"><label for="f5e">5. Outside vendors or agencies (if any)</label><div class="hint">Who spends your marketing money — agencies, freelancers, platforms.</div>
+    <input type="text" id="f5e" data-k="Outside vendors"></div>
 
   <details class="deeper">
     <summary><span class="tw">▸</span>Run this with AI — build the accountability system</summary>
@@ -354,6 +362,8 @@ footer a:hover{text-decoration:underline}
     <textarea id="f6c" data-k="Creative: briefed or ad-hoc"></textarea></div>
   <div class="q"><label for="f6d">4. What result does a campaign have to hit to keep running — and what's your rule for killing it?</label>
     <textarea id="f6d" data-k="Keep / kill rule"></textarea></div>
+  <div class="q"><label for="f6e">5. Your honest execution capacity</label><div class="hint">Who actually does the work — e.g., "me plus a part-time marketer."</div>
+    <input type="text" id="f6e" data-k="Execution capacity"></div>
 
   <details class="deeper">
     <summary><span class="tw">▸</span>Run this with AI — one campaign, briefed and measured</summary>
@@ -460,7 +470,7 @@ footer a:hover{text-decoration:underline}
     "What I want to be known for: " + v('f1d', "[the one 'why' behind the business]") + ". " +
     "Where that message is inconsistent today: " + v('f1e', "[where it contradicts itself]") + ". " +
     "Team alignment status: " + v('f1f', "[who isn't aligned yet]") + ". " +
-    "My annual priorities: [list them]. My firm-wide success metrics: [list them]. Strategic intent: [pivot / scale / hold / exit].\n\n" +
+    "My annual priorities: " + v('f1g', "[list them]") + ". My firm-wide success metrics: " + v('f1h', "[list them]") + ". Strategic intent: " + v('f1i', "[pivot / scale / hold / exit]") + ".\n\n" +
     "Act as an experienced outside strategist. Pressure-test this Destination Set: what would have to be true for the WIG to happen, where do the priorities fail to serve the WIG, and which \"success metrics\" are really vanity numbers? Then identify where growth most plausibly comes from — existing clients, new clients, new services, or new markets — with honest trade-offs. Do not simply validate my goals; your job is to challenge them. End with the three questions I'm avoiding.";
   }
   function P2(){
@@ -503,7 +513,8 @@ footer a:hover{text-decoration:underline}
     "My draft Scorecard numbers: " + v('f5b', "[3–5 weekly numbers]") + ". " +
     "My current rhythm for planning/review/accountability: " + v('f5c', "[when, if ever]") + ". " +
     "My content cadence today: " + v('f5d', "[consistent or sporadic]") + ".\n\n" +
-    "Build my accountability system: (1) turn my draft rocks into 1–3 well-formed rocks — specific, done/not-done by quarter end, one named owner each — and challenge any rock that's really just an ongoing activity; (2) refine my scorecard into 5–7 metrics split between lead and lag indicators, with why each earns a slot, where the data likely lives, and a starting red/yellow/green threshold; (3) tell me which of my metrics is a vanity number, and what replaces it; (4) if I use outside vendors [name them], draft the performance expectations and monthly review agenda I should be holding them to. Keep the whole weekly review under 20 minutes.";
+    "My outside vendors: " + v('f5e', "[none — skip step 4 if so]") + ".\n\n" +
+    "Build my accountability system: (1) turn my draft rocks into 1–3 well-formed rocks — specific, done/not-done by quarter end, one named owner each — and challenge any rock that's really just an ongoing activity; (2) refine my scorecard into 5–7 metrics split between lead and lag indicators, with why each earns a slot, where the data likely lives, and a starting red/yellow/green threshold; (3) tell me which of my metrics is a vanity number, and what replaces it; (4) for each outside vendor named above, draft the performance expectations and monthly review agenda I should be holding them to. Keep the whole weekly review under 20 minutes.";
   }
   function P6(){
     var uniques = [v('f3a',''), v('f3b',''), v('f3c','')].filter(function(x){return x && x !== "[fill in]";}).join("; ") || "[your uniques]";
@@ -513,7 +524,7 @@ footer a:hover{text-decoration:underline}
     "My X-Factor: " + v('f4f', "[step]") + ". My quarterly rocks: " + v('f5a', "[rocks]") + ". " +
     "My target CPA: " + v('f6a', "[what I can pay to land a customer and still profit]") + ". " +
     "My current keep/kill rule for campaigns: " + v('f6d', "[rule, if any]") + ".\n\n" +
-    "Produce: (1) a completed creative brief for one 90-day campaign — goal tied to a business outcome, specific audience segment, offer/CTA, core message in my buyer's language, channel choices with reasoning, and success metrics that include at least one business-outcome measure (CPA, leads, pipeline, or profitability — not clicks); (2) a week-by-week execution plan sized for a team of [your real capacity]; (3) an explicit keep/kill threshold for this campaign against my target CPA; (4) then run the stickier-not-ickier test on your own plan — flag anything that would read as automated, generic, or high-volume-low-relevance to the buyer, and fix it. Quality of judgment over quantity of output.";
+    "Produce: (1) a completed creative brief for one 90-day campaign — goal tied to a business outcome, specific audience segment, offer/CTA, core message in my buyer's language, channel choices with reasoning, and success metrics that include at least one business-outcome measure (CPA, leads, pipeline, or profitability — not clicks); (2) a week-by-week execution plan sized for a team of " + v('f6e', "[your real capacity]") + "; (3) an explicit keep/kill threshold for this campaign against my target CPA; (4) then run the stickier-not-ickier test on your own plan — flag anything that would read as automated, generic, or high-volume-low-relevance to the buyer, and fix it. Quality of judgment over quantity of output.";
   }
   var BUILDERS = {1:P1,2:P2,3:P3,4:P4,5:P5,6:P6};
 
@@ -574,12 +585,12 @@ footer a:hover{text-decoration:underline}
 
   var SECTIONS = [
     {title:"Session expectations", ids:["biz","e1","e2"]},
-    {title:"Fundamental 1 — Know Where You're Going", ids:["f1a","f1b","f1c","f1d","f1e","f1f"]},
+    {title:"Fundamental 1 — Know Where You're Going", ids:["f1a","f1b","f1c","f1d","f1e","f1f","f1g","f1h","f1i"]},
     {title:"Fundamental 2 — Understand Your Buyer", ids:["f2a","f2b","f2c","f2d","f2e"]},
     {title:"Fundamental 3 — Position Your Offer", ids:["f3a","f3b","f3c","f3d","f3e","f3f","f3g"]},
     {title:"Fundamental 4 — Sales & Marketing Alignment", ids:["f4a","f4b","f4c","f4d","f4e","f4f","f4g"]},
-    {title:"Fundamental 5 — Cadence for Planning & Accountability", ids:["f5a","f5b","f5c","f5d"]},
-    {title:"Fundamental 6 — Structured Approach to Advertising", ids:["f6a","f6b","f6c","f6d"]},
+    {title:"Fundamental 5 — Cadence for Planning & Accountability", ids:["f5a","f5b","f5c","f5d","f5e"]},
+    {title:"Fundamental 6 — Structured Approach to Advertising", ids:["f6a","f6b","f6c","f6d","f6e"]},
     {title:"The one I'm most exposed on", ids:["x1","x2"]}
   ];
 
