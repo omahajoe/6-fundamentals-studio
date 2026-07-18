@@ -1,0 +1,8 @@
+*.mp4
+*.mov
+*.pdf
+*.zip
+.DS_Store
+node_modules/
+.env
+.env.local

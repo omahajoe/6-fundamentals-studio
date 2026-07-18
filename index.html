@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 6 Fundamentals Strategy Studio — Workbook + AI Session</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fdfcf9; --card:#f3f1ec; --card2:#eceae4; --ink:#1c1e22; --muted:#4c5158; --soft:#2e3238;
+  --warm:#cf3f1d; --warm-dim:#fbe9e2; --cool:#1f6f9c; --cool-dim:#e7f0f5; --line:#ddd9d0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,sans-serif;font-size:17px;line-height:1.6;font-weight:400}
+.wrap{max-width:780px;margin:0 auto;padding:0 20px 80px}
+.serif{font-family:'Fraunces',Georgia,serif}
+.chip{font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.chip.warm{color:var(--warm)} .chip.cool{color:var(--cool)}
+#bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--cool),var(--warm));width:0%;z-index:50;transition:width .3s ease}
+#pct{position:fixed;top:10px;right:14px;font-size:12px;color:var(--soft);letter-spacing:.1em;z-index:50;font-weight:600}
+.hero{padding:84px 0 36px}
+.hero h1{font-size:clamp(32px,6vw,50px);font-weight:900;line-height:1.08;margin:14px 0 6px}
+.hero h1 .ai{color:var(--cool)}
+.hero .thesis{font-size:18px;margin:14px 0 4px;font-weight:600}
+.hero .thesis b:first-child{color:var(--warm)} .hero .thesis b:last-child{color:var(--cool)}
+.hero p.sub{color:var(--soft);max-width:60ch;margin-top:14px;font-size:17px}
+.diverge{margin:28px 0 0;height:56px}
+.byline{color:var(--muted);font-size:14px;margin-top:14px;font-weight:500}
+.howto{margin-top:22px;background:var(--card);border-radius:12px;padding:16px 18px;font-size:15.5px;color:var(--soft)}
+.howto b{color:var(--ink)}
+.howto .warm{color:var(--warm)} .howto .cool{color:var(--cool)}
+section.fund{margin-top:56px;padding-top:26px;border-top:1px solid var(--line);position:relative}
+.ghost{position:absolute;right:-6px;top:6px;font-family:'Fraunces',serif;font-weight:900;font-size:120px;line-height:1;color:#e9e5dc;user-select:none;pointer-events:none}
+section h2{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:clamp(22px,4vw,30px);margin:6px 0 8px;position:relative}
+section .why{color:var(--soft);font-size:16px;max-width:62ch;position:relative;font-style:italic}
+.learn{margin:16px 0 4px;font-size:16.5px;color:var(--ink);max-width:66ch;position:relative;line-height:1.65}
+.learn p{margin-bottom:12px}
+.learn b{color:var(--warm)}
+.learn .c{color:var(--cool);font-weight:600}
+.learn .quote{border-left:3px solid var(--warm);padding:6px 0 6px 14px;margin:12px 0;font-style:italic;color:var(--ink);font-size:17px}
+.lens{margin:18px 0 6px;background:var(--cool-dim);border-radius:10px;padding:14px 16px;font-size:15.5px;color:var(--ink);position:relative}
+.lens .chip{display:block;margin-bottom:4px}
+.q{margin-top:20px;position:relative}
+.q label{display:block;font-weight:600;font-size:16px;margin-bottom:4px}
+.q .hint{color:var(--muted);font-size:14.5px;margin-bottom:8px;font-weight:500}
+textarea,input[type=text]{width:100%;background:#ffffff;border:1px solid var(--line);border-radius:10px;color:var(--ink);font-family:inherit;font-size:16px;padding:11px 13px;resize:vertical;min-height:44px}
+textarea::placeholder,input::placeholder{color:#9a9fa7}
+textarea{min-height:76px}
+textarea:focus,input:focus{outline:2px solid var(--cool);outline-offset:1px;border-color:transparent}
+textarea.filled,input.filled{border-color:#7fae8c}
+.wig{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.wig input{flex:1 1 160px}
+.wig span{color:var(--muted);font-size:13px}
+.flow{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.flow input{flex:1 1 120px;min-width:110px}
+.flow .arrow{color:var(--warm);font-weight:700}
+/* deeper layer */
+details.deeper{margin-top:26px;background:var(--warm-dim);border:1px solid #ecc8ba;border-radius:12px;padding:0;position:relative}
+details.deeper summary{cursor:pointer;list-style:none;padding:14px 18px;font-weight:600;font-size:15px;color:var(--warm);display:flex;align-items:center;gap:10px}
+details.deeper summary::-webkit-details-marker{display:none}
+details.deeper summary .tw{transition:transform .2s ease;display:inline-block}
+details.deeper[open] summary .tw{transform:rotate(90deg)}
+details.deeper .inner{padding:2px 18px 18px}
+.cmoq{font-size:15.5px;margin-bottom:14px;color:var(--ink)}
+.cmoq b{display:block;margin-bottom:6px;color:var(--ink)}
+.cmoq ul{margin-left:18px;color:var(--soft)}
+.cmoq li{margin-bottom:4px}
+.artifact{font-size:15px;margin:12px 0 14px;color:var(--soft);font-weight:500}
+.artifact b{color:var(--warm)}
+.promptbox{background:#ffffff;border:1px solid var(--line);border-radius:10px;padding:14px;font-size:15px;color:var(--ink);max-height:190px;overflow:auto;white-space:pre-wrap;line-height:1.5}
+.promptbox .me{color:var(--cool);font-weight:600}
+.pbtn{margin-top:10px;background:var(--warm);color:#ffffff;border:none;border-radius:9px;padding:10px 16px;font-family:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.pbtn:hover{filter:brightness(1.08)}
+.pnote{font-size:14.5px;color:var(--muted);margin-top:8px;font-weight:500}
+/* exposure */
+#exposure .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:20px 0}
+.pick{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;text-align:left;color:var(--ink);font-family:inherit;font-size:15px;font-weight:500;transition:all .18s ease}
+.pick .n{font-family:'Fraunces',serif;font-weight:900;font-size:26px;color:var(--muted);display:block}
+.pick:hover{border-color:var(--muted)}
+.pick[aria-pressed=true]{background:var(--warm-dim);border-color:var(--warm)}
+.pick[aria-pressed=true] .n{color:var(--warm)}
+.payoff{background:var(--warm-dim);border-radius:12px;padding:16px 18px;margin-top:18px;font-size:16px;color:var(--ink)}
+.payoff b{color:var(--warm)}
+details.gloss{margin-top:44px;border-top:1px solid var(--line);padding-top:20px}
+details.gloss summary{cursor:pointer;font-weight:600;font-size:16px;color:var(--soft)}
+details.gloss summary:hover{color:var(--ink)}
+dl{margin-top:14px;font-size:15px}
+dt{font-weight:600;color:var(--warm);margin-top:10px}
+dd{color:var(--soft);margin-left:0}
+.actions{margin-top:48px;padding:22px;background:var(--card);border-radius:14px}
+.actions h3{font-family:'Fraunces',serif;font-size:20px;margin-bottom:6px}
+.actions p{color:var(--soft);font-size:15.5px;margin-bottom:16px;font-weight:500}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap}
+button.act{background:var(--warm);color:#ffffff;border:none;border-radius:10px;padding:12px 18px;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer}
+button.act.ghosted{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button.act:hover{filter:brightness(1.08)}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:11px 20px;border-radius:10px;font-size:14px;border:1px solid var(--ink);transition:transform .25s ease;z-index:60}
+#toast.show{transform:translateX(-50%) translateY(0)}
+footer{margin-top:54px;border-top:1px solid var(--line);padding-top:24px;font-size:15px;color:var(--soft)}
+footer .read{background:var(--cool-dim);border-radius:12px;padding:16px 18px;color:var(--ink);margin-bottom:18px}
+footer a{color:var(--cool);text-decoration:none}
+footer a:hover{text-decoration:underline}
+@media print{
+  body{background:#fff;color:#111}
+  #bar,#pct,.actions,footer .read,.diverge,details.deeper{display:none}
+  textarea,input{border:1px solid #999;color:#111;background:#fff}
+  .ghost{display:none}
+}
+@media(max-width:560px){.ghost{font-size:76px;top:2px}}
+</style>
+</head>
+<body>
+<div id="bar"></div><div id="pct">0%</div>
+
+<div class="wrap">
+
+<header class="hero">
+  <span class="chip">The founder strategy studio · from the keynote by Joe Frost</span>
+  <h1 class="serif">The 6 Fundamentals of Marketing <span class="ai">in the Age of AI</span></h1>
+  <p class="thesis"><b>Same Foundation.</b> <b>Fundamentally Different Execution.</b></p>
+  <svg class="diverge" viewBox="0 0 600 56" aria-hidden="true">
+    <line x1="0" y1="28" x2="300" y2="28" stroke="#8b8f96" stroke-width="1.5"/>
+    <line x1="300" y1="28" x2="600" y2="8" stroke="#1f6f9c" stroke-width="2.5"/>
+    <line x1="300" y1="28" x2="600" y2="48" stroke="#cf3f1d" stroke-width="2.5"/>
+  </svg>
+  <p class="sub"><b style="color:var(--ink)">You are the best marketer your company has.</b> You know the product, the customer, the competitor — that <i>is</i> marketing. If it hasn't worked yet, you didn't fail at it. You were never given a system for it. Just tactics.</p>
+  <p class="sub">This is the system — the six fundamentals yorCMO's fractional CMOs run inside companies every week, turned into a working session you lead yourself. Don't polish; capture what's true right now. Each fundamental teaches, then asks, then builds you a personalized AI prompt from your own answers. If it isn't written down, it doesn't exist — that's the standard a CMO holds. Hold yourself to it for 90 minutes.</p>
+  <div class="howto"><b>How this works:</b> <span class="warm">You</span> answer the questions — that's the foundation, and it stays yours. Then open <span class="warm">"Run this with AI"</span> under each fundamental: your answers are already woven into a ready-to-paste prompt for <span class="cool">ChatGPT, Claude, Gemini, or Copilot</span>. The prompts order the AI to challenge you, not agree with you. Don't remove that part.</div>
+  <p class="byline">Your answers stay on this page until you export them — nothing is uploaded anywhere.</p>
+</header>
+
+<section class="fund" id="expectations">
+  <span class="chip warm">Before you start</span>
+  <h2>Session expectations</h2>
+  <div class="q"><label for="biz">Describe your business in 2–3 sentences</label><div class="hint">What you sell, to whom, roughly how big. (This feeds every AI prompt below.)</div>
+    <textarea id="biz" data-k="My business"></textarea></div>
+  <div class="q"><label for="e1">What's the one question about your marketing you most want answered?</label>
+    <textarea id="e1" data-k="One question I want answered"></textarea></div>
+  <div class="q"><label for="e2">What do you want to walk out with?</label>
+    <textarea id="e2" data-k="What I want to walk out with"></textarea></div>
+</section>
+
+<!-- F1 -->
+<section class="fund">
+  <div class="ghost">1</div>
+  <span class="chip">Fundamental 1</span>
+  <h2>Know Where You're Going</h2>
+  <p class="why">Marketing without a destination is just activity. This is your vision, your goal, and the one thing you want the market to know you for.</p>
+  <div class="learn">
+    <p>Marketing can't be aligned to business intent that was never written down — and in most audits we run, it never was. <span class="c">AI changes the research:</span> the outside-in view that took a firm weeks now takes hours. What it cannot do is set your goals, your risk appetite, or your definition of "worth it." <b>The destination is a leadership act.</b></p>
+    <p>One warning before you use AI here: it will happily validate whatever direction you feed it — it tells you what you want to hear. A leader decides when the plan is real and when it's just agreement dressed up as analysis.</p>
+  </div>
+  <div class="lens"><span class="chip cool">Native lens — your WIG (Wildly Important Goal)</span>"from [current state] to [desired state] by [date]."</div>
+  <div class="q"><label>1. What's your 2-year WIG?</label><div class="hint">Measurable and time-bound.</div>
+    <div class="wig">
+      <span>From</span><input type="text" id="f1a" data-k="WIG — from" placeholder="current state">
+      <span>to</span><input type="text" id="f1b" data-k="WIG — to" placeholder="desired state">
+      <span>by</span><input type="text" id="f1c" data-k="WIG — by" placeholder="date">
+    </div></div>
+  <div class="q"><label for="f1d">2. What do you want to be known for?</label><div class="hint">The one "why" behind your business, in a sentence.</div>
+    <textarea id="f1d" data-k="Known for (the why)"></textarea></div>
+  <div class="q"><label for="f1e">3. Is that "why" communicated consistently everywhere a buyer meets you?</label><div class="hint">Site, sales, social — where does it contradict itself?</div>
+    <textarea id="f1e" data-k="Why communicated consistently?"></textarea></div>
+  <div class="q"><label for="f1f">4. Does your team share this vision and the numbers behind it?</label><div class="hint">Who isn't aligned yet?</div>
+    <textarea id="f1f" data-k="Team alignment"></textarea></div>
+
+  <details class="deeper">
+    <summary><span class="tw">▸</span>Run this with AI — pressure-test your Destination Set</summary>
+    <div class="inner">
+      <div class="cmoq"><b>What a CMO would look for:</b>
+        <ul><li>A 2-year WIG with a number and a date — not vibes</li>
+        <li>Annual priorities that visibly serve the WIG</li>
+        <li>Success metrics every leader defines the same way</li>
+        <li>The alignment test: <i>does everyone share the same vision?</i></li></ul></div>
+      <div class="artifact"><b>Artifact this produces:</b> your pressure-tested, one-page Destination Set.</div>
+      <div class="promptbox" id="p1box"></div>
+      <button class="pbtn" data-p="1">Copy my personalized prompt</button>
+      <div class="pnote">Anything in [brackets] still needs your input — paste and fill before running.</div>
+    </div>
+  </details>
+</section>
+
+<!-- F2 -->
+<section class="fund">
+  <div class="ghost">2</div>
+  <span class="chip">Fundamental 2</span>
+  <h2>Understand Your Buyer</h2>
+  <p class="why">Everything downstream breaks if you're guessing here. Get specific about who buys — and the moment they decide to.</p>
+  <div class="learn">
+    <p>Most companies build their buyer picture in a conference room. Our CMOs build it from <b>real buyer interviews</b>, organized into the <b>5 Buying Insights</b>: the Priority Initiative (the trigger event), Success Factors, Perceived Barriers, Decision Criteria, and the Buyer Journey — all in the buyer's verbatim words.</p>
+    <p>Two patterns surprise almost every founder: <span class="c">switching pain and onboarding effort kill more deals than price</span>, and referred buyers quietly "scrub everything" online before they ever call you. The best interview opener we know:</p>
+    <p class="quote">"Walk me back to the moment you started looking. What happened?"</p>
+  </div>
+  <div class="lens"><span class="chip cool">Native lens — the Trigger</span>The moment a buyer decides "I need this now." Not who they are — what sets them in motion.</div>
+  <div class="q"><label for="f2a">1. Who is your primary buyer?</label><div class="hint">Role, company type, the actual human on the other end.</div>
+    <textarea id="f2a" data-k="Primary buyer"></textarea></div>
+  <div class="q"><label for="f2b">2. What's their trigger?</label><div class="hint">What has to happen in their world before they come looking for you?</div>
+    <textarea id="f2b" data-k="The trigger"></textarea></div>
+  <div class="q"><label for="f2c">3. Are you serving more than one buyer with different triggers?</label><div class="hint">List them — and be honest about which ones your marketing actually speaks to today.</div>
+    <textarea id="f2c" data-k="Multiple buyers / triggers"></textarea></div>
+  <div class="q"><label for="f2d">4. Why do they choose you over the alternative? Why would they leave?</label>
+    <textarea id="f2d" data-k="Why choose / why leave"></textarea></div>
+  <div class="q"><label for="f2e">5. Which buyer segment is most profitable — and are you pointing your marketing at them?</label><div class="hint">Or at whoever's loudest?</div>
+    <textarea id="f2e" data-k="Most profitable segment"></textarea></div>
+
+  <details class="deeper">
+    <summary><span class="tw">▸</span>Run this with AI — the 5 Buying Insights</summary>
+    <div class="inner">
+      <div class="cmoq"><b>What a CMO would look for:</b>
+        <ul><li>Real buyer interviews on record — the best opener: <i>"Walk me back to the moment you started looking. What happened?"</i></li>
+        <li>The 5 Buying Insights in the buyer's verbatim words: Priority Initiative (trigger), Success Factors, Perceived Barriers, Decision Criteria, Buyer Journey</li>
+        <li>A shared ICP one-pager sales AND marketing both use</li></ul></div>
+      <div class="artifact"><b>Artifact this produces:</b> your 5 Buying Insights draft + shared ICP one-pager.</div>
+      <div class="promptbox" id="p2box"></div>
+      <button class="pbtn" data-p="2">Copy my personalized prompt</button>
+      <div class="pnote">Paste real buyer-voice material where marked — reviews, call notes, win/loss notes, prospect emails.</div>
+    </div>
+  </details>
+</section>
+
+<!-- F3 -->
+<section class="fund">
+  <div class="ghost">3</div>
+  <span class="chip">Fundamental 3</span>
+  <h2>Position Your Offer</h2>
+  <p class="why">The most visible fundamental — it's what the market actually sees. This is where most businesses are strong and buried at the same time.</p>
+  <div class="learn">
+    <p>Being good at what you do is a baseline, not a differentiator. Buyers decide on <b>outcomes</b> — responsiveness, clarity, proactive planning, ease of switching — so the test is whether your marketing is <b>outcome-forward or brand-forward</b>: are you answering the buyer's decision criteria, or talking about yourself?</p>
+    <p>And there's a new checkpoint on the validation pathway: <span class="c">buyers now ask AI who to hire.</span> Only about 7% notice a vendor in an AI answer because of the brand name — the firm that <i>fits</i> beats the firm that's famous. If answer engines can't see you, you fail the validation step without ever knowing it happened.</p>
+  </div>
+  <div class="lens"><span class="chip cool">Native lens — your 3 Uniques + Brand Promise</span>The genuine differentiators, and the commitment you'll stand behind.</div>
+  <div class="q"><label>1. Your 3 Uniques</label><div class="hint">Things that are actually true about you that competitors can't easily claim.</div>
+    <input type="text" id="f3a" data-k="Unique 1" placeholder="1." style="margin-bottom:8px">
+    <input type="text" id="f3b" data-k="Unique 2" placeholder="2." style="margin-bottom:8px">
+    <input type="text" id="f3c" data-k="Unique 3" placeholder="3."></div>
+  <div class="q"><label for="f3d">2. Your Brand Promise</label><div class="hint">The commitment (or guarantee) you can stand behind, out loud.</div>
+    <textarea id="f3d" data-k="Brand promise"></textarea></div>
+  <div class="q"><label for="f3e">3. From the customer's view, where do you sit vs. competitors?</label><div class="hint">Cheaper, premium, faster, safer — and does your marketing actually say so?</div>
+    <textarea id="f3e" data-k="Position vs. competitors"></textarea></div>
+  <div class="q"><label for="f3f">4. Where do buyers research you before they buy?</label><div class="hint">Search, referrals, reviews, LinkedIn — are you visible and believable at that exact stage?</div>
+    <textarea id="f3f" data-k="Where buyers research you"></textarea></div>
+  <div class="q"><label for="f3g">5. Do your reviews and credibility signals carry enough volume and warmth to be trusted?</label><div class="hint">Or is it thin enough to raise doubt?</div>
+    <textarea id="f3g" data-k="Reviews & credibility"></textarea></div>
+
+  <details class="deeper">
+    <summary><span class="tw">▸</span>Run this with AI — the positioning teardown</summary>
+    <div class="inner">
+      <div class="cmoq"><b>What a CMO would look for:</b>
+        <ul><li>Outcome-forward messaging, not brand-forward — buyers decide on outcomes</li>
+        <li>Positioning matched to your buyer's actual decision criteria, with proof for every claim</li>
+        <li>The validation pathway: referred buyers "scrub everything" online before they call — including asking AI who to hire</li></ul></div>
+      <div class="artifact"><b>Artifact this produces:</b> three outcome-forward positioning statements with required proof points — plus your AI-visibility check.</div>
+      <div class="promptbox" id="p3box"></div>
+      <button class="pbtn" data-p="3">Copy my personalized prompt</button>
+      <div class="pnote">Bonus 30-second check: ask your AI, "Who should I hire for [what you do] in [your market]?" Screenshot the answer — that's your positioning report card in the age of AI.</div>
+    </div>
+  </details>
+</section>
+
+<!-- F4 -->
+<section class="fund">
+  <div class="ghost">4</div>
+  <span class="chip">Fundamental 4</span>
+  <h2>Sales &amp; Marketing Alignment</h2>
+  <p class="why">Marketing hands the baton to sales. If that handoff is fumbled, spend leaks out.</p>
+  <div class="learn">
+    <p>In our audits, this fundamental fails one specific way most often: <b>nothing is documented.</b> No sales flow, no shared buyer definition, no joint review. Alignment isn't a feeling between departments — it's a set of artifacts both sides can point to.</p>
+    <p>Why it's urgent now: <span class="c">95% of deals are won by a vendor already on the buyer's Day-One shortlist</span> — formed before any sales contact. The deal is shaped before sales ever sees it. Marketing <i>is</i> your early sales team, whether you run it that way or not.</p>
+  </div>
+  <div class="lens"><span class="chip cool">Native lens — your X-Factor</span>The single highest-leverage step in your sales process. Fix that one step and everything downstream improves.</div>
+  <div class="q"><label>1. Is your sales flow documented? Map it:</label>
+    <div class="flow">
+      <input type="text" id="f4a" data-k="Sales flow — step 1"><span class="arrow">→</span>
+      <input type="text" id="f4b" data-k="Sales flow — step 2"><span class="arrow">→</span>
+      <input type="text" id="f4c" data-k="Sales flow — step 3"><span class="arrow">→</span>
+      <input type="text" id="f4d" data-k="Sales flow — step 4">
+    </div></div>
+  <div class="q"><label for="f4e">2. Do sales and marketing share the same buyer and the same trigger?</label><div class="hint">Or two different pictures?</div>
+    <textarea id="f4e" data-k="Shared buyer & trigger?"></textarea></div>
+  <div class="q"><label for="f4f">3. What's your X-Factor?</label><div class="hint">The one step in your funnel where the most deals are won or lost.</div>
+    <textarea id="f4f" data-k="X-Factor"></textarea></div>
+  <div class="q"><label for="f4g">4. Do different buyer types get different paths?</label><div class="hint">Or does everyone land in one undifferentiated funnel?</div>
+    <textarea id="f4g" data-k="Differentiated paths?"></textarea></div>
+
+  <details class="deeper">
+    <summary><span class="tw">▸</span>Run this with AI — build the alignment artifacts</summary>
+    <div class="inner">
+      <div class="cmoq"><b>What a CMO would look for:</b>
+        <ul><li>A documented sales flow — stages, entry/exit criteria, owner per stage, handoffs</li>
+        <li>A shared lead definition sales and marketing could both sign</li>
+        <li>A standing weekly joint sales + marketing meeting: pipeline health, follow-up outcomes, what messaging is helping or hurting</li></ul></div>
+      <div class="artifact"><b>Artifact this produces:</b> documented sales flow + shared lead definitions + weekly joint S&amp;M agenda.</div>
+      <div class="promptbox" id="p4box"></div>
+      <button class="pbtn" data-p="4">Copy my personalized prompt</button>
+      <div class="pnote">Paste recent sales conversation notes where marked — even rough notes work.</div>
+    </div>
+  </details>
+</section>
+
+<!-- F5 -->
+<section class="fund">
+  <div class="ghost">5</div>
+  <span class="chip">Fundamental 5</span>
+  <h2>Cadence for Planning &amp; Accountability</h2>
+  <p class="why">Strategy dies without rhythm. This is the operating system that keeps marketing accountable.</p>
+  <div class="learn">
+    <p>Growth is a discipline, not a project — and the discipline runs on two rhythms: <b>quarterly</b> (set the goal, define the Rocks, document the campaign plans) and <b>weekly</b> (scorecard, rock status, issues). Cadence dies in most companies because it's tedious. <span class="c">AI removes the tedium</span> — it pulls the numbers, fills the scorecard, flags anomalies, drafts the update before the meeting.</p>
+    <p>What AI cannot do is own the number. <b>Every rock and every metric carries a person's name</b> — a name, not a department. And don't skip the review nobody schedules: vendor accountability. Undocumented vendor expectations are how firms get burned.</p>
+  </div>
+  <div class="lens"><span class="chip cool">Native lens — Rocks &amp; Scorecard</span>Your quarterly priorities (Rocks) and the handful of numbers you watch every week (Scorecard).</div>
+  <div class="q"><label for="f5a">1. Your marketing Rocks for this quarter</label><div class="hint">The 1–3 priorities that matter most.</div>
+    <textarea id="f5a" data-k="Marketing Rocks"></textarea></div>
+  <div class="q"><label for="f5b">2. Your Scorecard</label><div class="hint">The 3–5 numbers you'll watch weekly to know if it's working.</div>
+    <textarea id="f5b" data-k="Scorecard"></textarea></div>
+  <div class="q"><label for="f5c">3. What's your rhythm?</label><div class="hint">When do you plan, review, and hold team/vendors accountable?</div>
+    <textarea id="f5c" data-k="Rhythm"></textarea></div>
+  <div class="q"><label for="f5d">4. Is your content and visibility cadence consistent or sporadic?</label><div class="hint">The market reads silence as a signal.</div>
+    <textarea id="f5d" data-k="Content cadence"></textarea></div>
+
+  <details class="deeper">
+    <summary><span class="tw">▸</span>Run this with AI — build the accountability system</summary>
+    <div class="inner">
+      <div class="cmoq"><b>What a CMO would look for:</b>
+        <ul><li>Well-formed rocks: specific, done/not-done by quarter end, one named owner each</li>
+        <li>A weekly scorecard of lead and lag indicators, reviewable in 20 minutes</li>
+        <li>Vendor accountability: documented expectations and a results review — undocumented vendor expectations are how firms get burned</li></ul></div>
+      <div class="artifact"><b>Artifact this produces:</b> quarterly rock(s) with owners + weekly scorecard + vendor review cadence.</div>
+      <div class="promptbox" id="p5box"></div>
+      <button class="pbtn" data-p="5">Copy my personalized prompt</button>
+      <div class="pnote">AI pulls the numbers and fills the scorecard. A person — with a name — owns the number.</div>
+    </div>
+  </details>
+</section>
+
+<!-- F6 -->
+<section class="fund">
+  <div class="ghost">6</div>
+  <span class="chip">Fundamental 6</span>
+  <h2>Structured Approach to Advertising</h2>
+  <p class="why">Advertising should be a system you evaluate, not a bill you pay on faith.</p>
+  <div class="learn">
+    <p>This is where AI changes the <i>most</i> — content, campaigns, and creative are food for AI, and the cost of producing them is collapsing toward zero. Which is exactly why the discipline matters more, not less: <b>automating bad marketing doesn't fix it — it fails faster and louder.</b></p>
+    <p>Every campaign runs through a <b>creative brief</b> that forces five decisions before anything gets made: goal, audience, offer, creative &amp; channels, and success metrics — measured on <span class="c">business outcomes (CPA, leads, pipeline, profitability), not clicks.</span> The rule for everything AI produces for you: <b>stickier, not ickier.</b> Ickier is spam at scale and outreach that reads automated. Stickier is more relevant, more personal, more worth keeping — the machine does the grunt work, a human does the judgment.</p>
+  </div>
+  <div class="lens"><span class="chip cool">Native lens — CPA &amp; profitability</span>Every tactic earns its place against cost-per-acquisition and profit — not vibes.</div>
+  <div class="q"><label for="f6a">1. Do you know your target cost-per-acquisition?</label><div class="hint">What can you pay to land a customer and still profit?</div>
+    <textarea id="f6a" data-k="Target CPA"></textarea></div>
+  <div class="q"><label for="f6b">2. Are you evaluating each channel against CPA and profit?</label><div class="hint">Or spending because you always have?</div>
+    <textarea id="f6b" data-k="Channel evaluation"></textarea></div>
+  <div class="q"><label for="f6c">3. Is your creative brand-consistent and briefed, or ad-hoc?</label>
+    <textarea id="f6c" data-k="Creative: briefed or ad-hoc"></textarea></div>
+  <div class="q"><label for="f6d">4. What result does a campaign have to hit to keep running — and what's your rule for killing it?</label>
+    <textarea id="f6d" data-k="Keep / kill rule"></textarea></div>
+
+  <details class="deeper">
+    <summary><span class="tw">▸</span>Run this with AI — one campaign, briefed and measured</summary>
+    <div class="inner">
+      <div class="cmoq"><b>What a CMO would look for:</b>
+        <ul><li>A creative brief that forces five decisions before anything gets made: goal, audience, offer/CTA, creative &amp; channels, success metrics</li>
+        <li>Business-outcome measurement — CPA, leads, pipeline, profitability. Clicks and engagement are activity, not measurement</li>
+        <li>The rule: AI should make your marketing <i>stickier, not ickier</i></li></ul></div>
+      <div class="artifact"><b>Artifact this produces:</b> one completed creative brief + a 90-day campaign plan measured on business outcomes.</div>
+      <div class="promptbox" id="p6box"></div>
+      <button class="pbtn" data-p="6">Copy my personalized prompt</button>
+      <div class="pnote">This prompt chains everything above — the more you've filled in, the sharper it gets.</div>
+    </div>
+  </details>
+</section>
+
+<!-- Exposure -->
+<section class="fund" id="exposure">
+  <span class="chip warm">The moment of truth</span>
+  <h2>The one you're most exposed on</h2>
+  <p class="why">Look back across all six. Where's the widest gap between where you are and where you appear to be headed? Tap it.</p>
+  <div class="cards" role="group" aria-label="Pick the fundamental you're most exposed on">
+    <button class="pick" data-f="1" aria-pressed="false"><span class="n">1</span>Know Where You're Going</button>
+    <button class="pick" data-f="2" aria-pressed="false"><span class="n">2</span>Understand Your Buyer</button>
+    <button class="pick" data-f="3" aria-pressed="false"><span class="n">3</span>Position Your Offer</button>
+    <button class="pick" data-f="4" aria-pressed="false"><span class="n">4</span>Sales &amp; Marketing Alignment</button>
+    <button class="pick" data-f="5" aria-pressed="false"><span class="n">5</span>Cadence for Planning &amp; Accountability</button>
+    <button class="pick" data-f="6" aria-pressed="false"><span class="n">6</span>Structured Approach to Advertising</button>
+  </div>
+  <div class="q"><label for="x1">Why — in one honest sentence:</label>
+    <textarea id="x1" data-k="Why I'm exposed here"></textarea></div>
+  <div class="q"><label for="x2">What it's really costing me:</label><div class="hint">The strategic problem underneath, not the surface symptom.</div>
+    <textarea id="x2" data-k="What it's costing me"></textarea></div>
+  <div class="payoff">Fixing this is what turns marketing from a <b>cost center into a value driver</b>. It's a <b>CMO-level problem, not a campaign problem</b> — and now you know which one to solve first.</div>
+</section>
+
+<details class="gloss">
+  <summary>Native language glossary</summary>
+  <dl>
+    <dt>WIG (Wildly Important Goal)</dt><dd>"from [current state] to [desired state] by [date]."</dd>
+    <dt>What you're known for</dt><dd>The market's perception of your "why."</dd>
+    <dt>Trigger</dt><dd>The moment a buyer decides "I need this now."</dd>
+    <dt>3 Uniques</dt><dd>Your genuine, hard-to-copy differentiators.</dd>
+    <dt>Brand Promise</dt><dd>The commitment you can stand behind (often a guarantee).</dd>
+    <dt>X-Factor</dt><dd>The single highest-leverage step in your sales process.</dd>
+    <dt>Rocks</dt><dd>Your quarterly priorities.</dd>
+    <dt>Scorecard</dt><dd>The few numbers you watch weekly.</dd>
+    <dt>CPA</dt><dd>Cost-per-acquisition; what it costs to land a customer.</dd>
+    <dt>5 Buying Insights</dt><dd>Priority Initiative, Success Factors, Perceived Barriers, Decision Criteria, Buyer Journey — built from real buyer interviews.</dd>
+    <dt>Cost center → value driver</dt><dd>The shift marketing makes when it's run as strategy, not spend.</dd>
+  </dl>
+  <p style="margin-top:16px;font-size:14px;color:var(--muted);font-style:italic">A note on borrowed language: "WIG (Wildly Important Goal)" comes with gratitude from FranklinCovey's <b>The 4 Disciplines of Execution</b>; "Rocks," "Scorecard," and "3 Uniques" from Gino Wickman's <b>Traction</b> and the EOS® model. We use them because your leadership team probably already does — the 6 Fundamentals are built to plug into the operating system you're already running.</p>
+</details>
+
+<section class="fund" id="closing">
+  <span class="chip warm">Before you go</span>
+  <h2>Two honest notes</h2>
+  <div class="learn">
+    <p><b>On AI:</b> everything in this studio made AI your analyst, your researcher, and your production team. None of it made AI your leader. The WIG, the positioning, the name on every number — those stayed with you the whole way through. That was the point. <span class="c">Same foundation. Fundamentally different execution.</span></p>
+    <p><b>On leading this alone:</b> this session is the self-guided version of what a yorCMO fractional CMO runs inside companies every week — with the buyer interviews done properly, the systems installed, and the AI tooling already built. If the exposed fundamental you named above feels bigger than a weekend project, that's because it is. It's a CMO-level problem — and now you know which one to solve first.</p>
+  </div>
+</section>
+
+<div class="actions">
+  <h3 class="serif">Take your strategy with you</h3>
+  <p>Your answers live only on this page — export before you close it. The download includes your answers AND your full set of personalized AI prompts.</p>
+  <div class="btnrow">
+    <button class="act" id="dl">Download strategy + prompts (.md)</button>
+    <button class="act ghosted" id="copy">Copy to clipboard</button>
+    <button class="act ghosted" onclick="window.print()">Print / save as PDF</button>
+  </div>
+</div>
+
+<footer>
+  <div class="read"><b>Want to see your marketing the way a buyer — or an AI engine — sees it?</b><br>
+  Request a complimentary <b>6 Fundamentals Read</b> of your business at <a href="https://yorcmo.com" rel="noopener">yorCMO.com</a>. No pitch attached. It's the most useful 15 minutes we can give you.</div>
+  Joe Frost · <a href="https://josephmarkfrost.com" rel="noopener">josephmarkfrost.com</a> · <a href="https://yorcmo.com" rel="noopener">yorCMO.com</a><br>
+  © Joe Frost / yorCMO — The 6 Fundamentals of Marketing · Way Better Marketing
+</footer>
+
+</div>
+
+<div id="toast" role="status"></div>
+
+<script>
+(function(){
+  var fields = Array.prototype.slice.call(document.querySelectorAll('textarea, input[type=text]'));
+  var bar = document.getElementById('bar'), pct = document.getElementById('pct');
+  var exposed = null;
+  var FUNDS = {1:"Know Where You're Going",2:"Understand Your Buyer",3:"Position Your Offer",4:"Sales & Marketing Alignment",5:"Cadence for Planning & Accountability",6:"Structured Approach to Advertising"};
+
+  function v(id, fallback){
+    var el = document.getElementById(id);
+    var val = el ? el.value.trim() : "";
+    return val ? val : (fallback || "[fill in]");
+  }
+  function has(id){ var el=document.getElementById(id); return el && el.value.trim().length>0; }
+
+  // ---------- personalized prompt builders ----------
+  function P1(){
+    var wig = (has('f1a')||has('f1b')||has('f1c')) ? ("From " + v('f1a') + " to " + v('f1b') + " by " + v('f1c')) : "[state your WIG: from current state, to desired state, by date]";
+    return "I'm the owner of " + v('biz', "[describe your business in 2–3 sentences: what you sell, to whom, roughly how big]") + ". " +
+    "My 2-year Wildly Important Goal (WIG): " + wig + ". " +
+    "What I want to be known for: " + v('f1d', "[the one 'why' behind the business]") + ". " +
+    "Where that message is inconsistent today: " + v('f1e', "[where it contradicts itself]") + ". " +
+    "Team alignment status: " + v('f1f', "[who isn't aligned yet]") + ". " +
+    "My annual priorities: [list them]. My firm-wide success metrics: [list them]. Strategic intent: [pivot / scale / hold / exit].\n\n" +
+    "Act as an experienced outside strategist. Pressure-test this Destination Set: what would have to be true for the WIG to happen, where do the priorities fail to serve the WIG, and which \"success metrics\" are really vanity numbers? Then identify where growth most plausibly comes from — existing clients, new clients, new services, or new markets — with honest trade-offs. Do not simply validate my goals; your job is to challenge them. End with the three questions I'm avoiding.";
+  }
+  function P2(){
+    return "My business: " + v('biz', "[2–3 sentences]") + ". " +
+    "My current best guess at my primary buyer: " + v('f2a', "[role, company type, the human]") + ". " +
+    "Their trigger, as I understand it: " + v('f2b', "[what happens before they come looking]") + ". " +
+    "Other buyers/triggers I may serve: " + v('f2c', "[list]") + ". " +
+    "Why I think they choose us / would leave: " + v('f2d', "[honest answer]") + ". " +
+    "Most profitable segment: " + v('f2e', "[segment]") + ".\n\n" +
+    "Now here is raw buyer-voice material from my business: [PASTE — interview notes, sales call notes or transcripts, reviews, win/loss notes, prospect emails].\n\n" +
+    "Analyze it using the 5 Buying Insights framework: (1) Priority Initiative — the trigger events that started each buying journey; (2) Success Factors — outcomes buyers wanted, in their words; (3) Perceived Barriers — the risks and switching friction that almost stopped them; (4) Decision Criteria — what they actually compared on; (5) Buyer Journey — who they trusted and in what sequence, including how they validated us online before making contact. Quote the buyer's verbatim words as evidence for every insight, and flag every place my guesses above are contradicted by the evidence. Where my material is too thin to support an insight, say \"not evidenced\" instead of guessing — and list the interview questions that would close each gap. Then draft a one-page ICP/persona for sales and marketing to share.";
+  }
+  function P3(){
+    var uniques = [v('f3a',''), v('f3b',''), v('f3c','')].filter(function(x){return x && x !== "[fill in]";});
+    var uStr = uniques.length ? uniques.join("; ") : "[your 3 Uniques]";
+    return "My business: " + v('biz', "[2–3 sentences]") + ". " +
+    "My 3 Uniques: " + uStr + ". " +
+    "My Brand Promise: " + v('f3d', "[the commitment you stand behind]") + ". " +
+    "Where I sit vs. competitors from the customer's view: " + v('f3e', "[cheaper / premium / faster / safer]") + ". " +
+    "Where buyers research me before buying: " + v('f3f', "[search, referrals, reviews, LinkedIn]") + ". " +
+    "My buyer's trigger and decision drivers (from my buyer work): " + v('f2b', "[trigger]") + "; " + v('f2d', "[why they choose / leave]") + ".\n\n" +
+    "Here is my homepage copy and my top competitor's: [PASTE BOTH].\n\n" +
+    "Analyze as a skeptical buyer doing pre-call validation. (1) Score each site against my buyer's actual criteria — which are visibly answered, which are absent? (2) Diagnose brand-forward vs. outcome-forward: where am I talking about myself when the buyer is asking about outcomes? (3) Test my 3 Uniques honestly — could my competitor claim any of them? If so, they're not uniques. (4) What does my competitor claim that I leave unanswered, and what do I claim without proof? (5) Draft three outcome-forward positioning statements built directly from my buyer's criteria, each with the proof point I'd need to make it credible. Be blunt about where my current copy is generic.";
+  }
+  function P4(){
+    var steps = [v('f4a',''), v('f4b',''), v('f4c',''), v('f4d','')].filter(function(x){return x && x !== "[fill in]";});
+    var flow = steps.length ? steps.join(" → ") : "[describe your stages as best you can]";
+    return "My business: " + v('biz', "[2–3 sentences]") + ". " +
+    "My sales flow as it works today: " + flow + ". " +
+    "Whether sales and marketing share the same buyer and trigger: " + v('f4e', "[honest answer]") + ". " +
+    "My X-Factor — where the most deals are won or lost: " + v('f4f', "[the step]") + ". " +
+    "Whether different buyer types get different paths: " + v('f4g', "[answer]") + ".\n\n" +
+    "Here are notes from my recent sales conversations: [PASTE — even rough notes work].\n\n" +
+    "Produce three artifacts: (1) a documented sales flow — stages with entry/exit criteria, owner per stage, and handoff points, flagging every place my description was ambiguous; (2) a proposed lead/qualified-lead definition sales and marketing could both sign; (3) a standing 30-minute weekly sales + marketing meeting agenda covering pipeline health, follow-up outcomes, and what messaging is helping or hurting — plus, from my sales notes, the top objections and the one piece of content that would move the most deals if it existed by Friday. Give special attention to my X-Factor step: what would have to change there to win more? Challenge me on any stage where I have no owner or no exit criteria.";
+  }
+  function P5(){
+    var wig = (has('f1a')||has('f1b')||has('f1c')) ? ("From " + v('f1a') + " to " + v('f1b') + " by " + v('f1c')) : "[paste your WIG]";
+    return "My business: " + v('biz', "[2–3 sentences]") + ". My 2-year WIG: " + wig + ". " +
+    "My draft marketing Rocks this quarter: " + v('f5a', "[1–3 priorities]") + ". " +
+    "My draft Scorecard numbers: " + v('f5b', "[3–5 weekly numbers]") + ". " +
+    "My current rhythm for planning/review/accountability: " + v('f5c', "[when, if ever]") + ". " +
+    "My content cadence today: " + v('f5d', "[consistent or sporadic]") + ".\n\n" +
+    "Build my accountability system: (1) turn my draft rocks into 1–3 well-formed rocks — specific, done/not-done by quarter end, one named owner each — and challenge any rock that's really just an ongoing activity; (2) refine my scorecard into 5–7 metrics split between lead and lag indicators, with why each earns a slot, where the data likely lives, and a starting red/yellow/green threshold; (3) tell me which of my metrics is a vanity number, and what replaces it; (4) if I use outside vendors [name them], draft the performance expectations and monthly review agenda I should be holding them to. Keep the whole weekly review under 20 minutes.";
+  }
+  function P6(){
+    var uniques = [v('f3a',''), v('f3b',''), v('f3c','')].filter(function(x){return x && x !== "[fill in]";}).join("; ") || "[your uniques]";
+    return "Use everything I've established. My business: " + v('biz', "[2–3 sentences]") + ". My WIG: " + (has('f1b') ? ("to " + v('f1b') + " by " + v('f1c')) : "[from F1]") + ". " +
+    "My buyer and trigger: " + v('f2a', "[buyer]") + " — triggered by " + v('f2b', "[trigger]") + ". " +
+    "My positioning: " + uniques + "; brand promise: " + v('f3d', "[promise]") + ". " +
+    "My X-Factor: " + v('f4f', "[step]") + ". My quarterly rocks: " + v('f5a', "[rocks]") + ". " +
+    "My target CPA: " + v('f6a', "[what I can pay to land a customer and still profit]") + ". " +
+    "My current keep/kill rule for campaigns: " + v('f6d', "[rule, if any]") + ".\n\n" +
+    "Produce: (1) a completed creative brief for one 90-day campaign — goal tied to a business outcome, specific audience segment, offer/CTA, core message in my buyer's language, channel choices with reasoning, and success metrics that include at least one business-outcome measure (CPA, leads, pipeline, or profitability — not clicks); (2) a week-by-week execution plan sized for a team of [your real capacity]; (3) an explicit keep/kill threshold for this campaign against my target CPA; (4) then run the stickier-not-ickier test on your own plan — flag anything that would read as automated, generic, or high-volume-low-relevance to the buyer, and fix it. Quality of judgment over quantity of output.";
+  }
+  var BUILDERS = {1:P1,2:P2,3:P3,4:P4,5:P5,6:P6};
+
+  function refreshPrompts(){
+    for(var i=1;i<=6;i++){
+      var box = document.getElementById('p'+i+'box');
+      if(box) box.textContent = BUILDERS[i]();
+    }
+  }
+
+  function refresh(){
+    var filled = 0;
+    fields.forEach(function(f){
+      var hasV = f.value.trim().length > 0;
+      f.classList.toggle('filled', hasV);
+      if(hasV) filled++;
+    });
+    var p = Math.round(100 * filled / fields.length);
+    bar.style.width = p + '%';
+    pct.textContent = p + '%';
+    refreshPrompts();
+  }
+  fields.forEach(function(f){ f.addEventListener('input', refresh); });
+
+  document.querySelectorAll('.pick').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.pick').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+      btn.setAttribute('aria-pressed','true');
+      exposed = btn.getAttribute('data-f');
+    });
+  });
+
+  function toast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 2200);
+  }
+
+  document.querySelectorAll('.pbtn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var n = btn.getAttribute('data-p');
+      copyText(BUILDERS[n](), 'Prompt ' + n + ' copied — paste into any AI');
+    });
+  });
+
+  function copyText(text, msg){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ toast(msg); }, function(){ fallbackCopy(text, msg); });
+    } else { fallbackCopy(text, msg); }
+  }
+  function fallbackCopy(text, msg){
+    var ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); toast(msg); }
+    catch(e){ toast('Copy failed — select the text manually'); }
+    ta.remove();
+  }
+
+  var SECTIONS = [
+    {title:"Session expectations", ids:["biz","e1","e2"]},
+    {title:"Fundamental 1 — Know Where You're Going", ids:["f1a","f1b","f1c","f1d","f1e","f1f"]},
+    {title:"Fundamental 2 — Understand Your Buyer", ids:["f2a","f2b","f2c","f2d","f2e"]},
+    {title:"Fundamental 3 — Position Your Offer", ids:["f3a","f3b","f3c","f3d","f3e","f3f","f3g"]},
+    {title:"Fundamental 4 — Sales & Marketing Alignment", ids:["f4a","f4b","f4c","f4d","f4e","f4f","f4g"]},
+    {title:"Fundamental 5 — Cadence for Planning & Accountability", ids:["f5a","f5b","f5c","f5d"]},
+    {title:"Fundamental 6 — Structured Approach to Advertising", ids:["f6a","f6b","f6c","f6d"]},
+    {title:"The one I'm most exposed on", ids:["x1","x2"]}
+  ];
+
+  function buildMd(){
+    var d = new Date();
+    var md = "# My 6 Fundamentals Marketing Strategy\n";
+    md += "*Built with the yorCMO Proven Process — " + d.toLocaleDateString() + "*\n\n";
+    SECTIONS.forEach(function(s){
+      var lines = [];
+      s.ids.forEach(function(id){
+        var el = document.getElementById(id);
+        if(el && el.value.trim()){
+          lines.push("**" + el.getAttribute('data-k') + ":** " + el.value.trim());
+        }
+      });
+      if(s.title === "The one I'm most exposed on" && exposed){
+        lines.unshift("**Most exposed fundamental:** Fundamental " + exposed + " — " + FUNDS[exposed]);
+      }
+      if(lines.length){
+        md += "## " + s.title + "\n\n" + lines.join("\n\n") + "\n\n";
+      }
+    });
+    md += "---\n\n# My Personalized AI Prompts\n";
+    md += "*Built from my answers above. Paste into ChatGPT, Claude, Gemini, or Copilot. Fill anything still in [brackets]. Don't delete the challenge instructions — AI's default is to agree with you; these order it not to.*\n\n";
+    var PT = {1:"Pressure-test my Destination Set",2:"The 5 Buying Insights",3:"The positioning teardown",4:"Build the alignment artifacts",5:"Build the accountability system",6:"One campaign, briefed and measured"};
+    for(var i=1;i<=6;i++){
+      md += "## Prompt " + i + " — " + PT[i] + "\n\n> " + BUILDERS[i]().replace(/\n/g, "\n> ") + "\n\n";
+    }
+    md += "---\n\nFixing your exposed fundamental is what turns marketing from a cost center into a value driver. It's a CMO-level problem, not a campaign problem.\n\n";
+    md += "Want an outside view? Request a complimentary 6 Fundamentals Read at yorCMO.com\n";
+    md += "Joe Frost · josephmarkfrost.com · yorCMO.com\n";
+    return md;
+  }
+
+  document.getElementById('dl').addEventListener('click', function(){
+    var blob = new Blob([buildMd()], {type:'text/markdown'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'my-6-fundamentals-strategy-and-prompts.md';
+    document.body.appendChild(a); a.click(); a.remove();
+    toast('Strategy + prompts downloaded');
+  });
+
+  document.getElementById('copy').addEventListener('click', function(){
+    copyText(buildMd(), 'Copied to clipboard');
+  });
+
+  refresh();
+})();
+</script>
+</body>
+</html>
