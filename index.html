@@ -75,6 +75,10 @@ details.deeper .inner{padding:2px 18px 18px}
 .pbtn{margin-top:10px;background:var(--warm);color:#ffffff;border:none;border-radius:9px;padding:10px 16px;font-family:inherit;font-weight:600;font-size:14px;cursor:pointer}
 .pbtn:hover{filter:brightness(1.08)}
 .pnote{font-size:14.5px;color:var(--muted);margin-top:8px;font-weight:500}
+.audiorow{display:flex;align-items:center;gap:10px;margin:12px 0 2px;position:relative}
+.audioBtn{width:42px;height:42px;border-radius:50%;border:none;background:var(--warm);color:#fff;font-size:14px;cursor:pointer;flex:0 0 42px;display:flex;align-items:center;justify-content:center}
+.audioBtn:hover{filter:brightness(1.08)}
+.alabel{font-size:14.5px;color:var(--soft);font-weight:600}
 /* exposure */
 #exposure .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:20px 0}
 .pick{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;text-align:left;color:var(--ink);font-family:inherit;font-size:15px;font-weight:500;transition:all .18s ease}
@@ -105,7 +109,7 @@ footer a{color:var(--cool);text-decoration:none}
 footer a:hover{text-decoration:underline}
 @media print{
   body{background:#fff;color:#111}
-  #bar,#pct,.actions,footer .read,.diverge,details.deeper{display:none}
+  #bar,#pct,.actions,footer .read,.diverge,details.deeper,.audiorow{display:none}
   textarea,input{border:1px solid #999;color:#111;background:#fff}
   .ghost{display:none}
 }
@@ -126,6 +130,7 @@ footer a:hover{text-decoration:underline}
     <line x1="300" y1="28" x2="600" y2="8" stroke="#1f6f9c" stroke-width="2.5"/>
     <line x1="300" y1="28" x2="600" y2="48" stroke="#cf3f1d" stroke-width="2.5"/>
   </svg>
+  <div class="audiorow"><button class="audioBtn" type="button" data-src="audio/audio-welcome.mp3" aria-label="Play audio: Hear Joe — start here">▶</button><span class="alabel">Hear Joe — start here · 0:44</span></div>
   <p class="sub"><b style="color:var(--ink)">You are the best marketer your company has.</b> You know the product, the customer, the competitor — that <i>is</i> marketing. If it hasn't worked yet, you didn't fail at it. You were never given a system for it. Just tactics.</p>
   <p class="sub">This is the system — the six fundamentals yorCMO's fractional CMOs run inside companies every week, turned into a working session you lead yourself. Don't polish; capture what's true right now. Each fundamental teaches, then asks, then builds you a personalized AI prompt from your own answers. If it isn't written down, it doesn't exist — that's the standard a CMO holds. Hold yourself to it for 90 minutes.</p>
   <div class="howto"><b>How this works:</b> <span class="warm">You</span> answer the questions — that's the foundation, and it stays yours. Then open <span class="warm">"Run this with AI"</span> under each fundamental: your answers are already woven into a ready-to-paste prompt for <span class="cool">ChatGPT, Claude, Gemini, or Copilot</span>. The prompts order the AI to challenge you, not agree with you. Don't remove that part.</div>
@@ -148,6 +153,7 @@ footer a:hover{text-decoration:underline}
   <div class="ghost">1</div>
   <span class="chip">Fundamental 1</span>
   <h2>Know Where You're Going</h2>
+  <div class="audiorow"><button class="audioBtn" type="button" data-src="audio/audio-f1.mp3" aria-label="Play audio: Hear Joe on this fundamental">▶</button><span class="alabel">Hear Joe on this fundamental · 0:47</span></div>
   <p class="why">Marketing without a destination is just activity. This is your vision, your goal, and the one thing you want the market to know you for.</p>
   <div class="learn">
     <p>Marketing can't be aligned to business intent that was never written down — and in most audits we run, it never was. <span class="c">AI changes the research:</span> the outside-in view that took a firm weeks now takes hours. What it cannot do is set your goals, your risk appetite, or your definition of "worth it." <b>The destination is a leadership act.</b></p>
@@ -194,6 +200,7 @@ footer a:hover{text-decoration:underline}
   <div class="ghost">2</div>
   <span class="chip">Fundamental 2</span>
   <h2>Understand Your Buyer</h2>
+  <div class="audiorow"><button class="audioBtn" type="button" data-src="audio/audio-f2.mp3" aria-label="Play audio: Hear Joe on this fundamental">▶</button><span class="alabel">Hear Joe on this fundamental · 0:44</span></div>
   <p class="why">Everything downstream breaks if you're guessing here. Get specific about who buys — and the moment they decide to.</p>
   <div class="learn">
     <p>Most companies build their buyer picture in a conference room. Our CMOs build it from <b>real buyer interviews</b>, organized into the <b>5 Buying Insights</b>: the Priority Initiative (the trigger event), Success Factors, Perceived Barriers, Decision Criteria, and the Buyer Journey — all in the buyer's verbatim words.</p>
@@ -232,6 +239,7 @@ footer a:hover{text-decoration:underline}
   <div class="ghost">3</div>
   <span class="chip">Fundamental 3</span>
   <h2>Position Your Offer</h2>
+  <div class="audiorow"><button class="audioBtn" type="button" data-src="audio/audio-f3.mp3" aria-label="Play audio: Hear Joe on this fundamental">▶</button><span class="alabel">Hear Joe on this fundamental · 0:42</span></div>
   <p class="why">The most visible fundamental — it's what the market actually sees. This is where most businesses are strong and buried at the same time.</p>
   <div class="learn">
     <p>Being good at what you do is a baseline, not a differentiator. Buyers decide on <b>outcomes</b> — responsiveness, clarity, proactive planning, ease of switching — so the test is whether your marketing is <b>outcome-forward or brand-forward</b>: are you answering the buyer's decision criteria, or talking about yourself?</p>
@@ -271,6 +279,7 @@ footer a:hover{text-decoration:underline}
   <div class="ghost">4</div>
   <span class="chip">Fundamental 4</span>
   <h2>Sales &amp; Marketing Alignment</h2>
+  <div class="audiorow"><button class="audioBtn" type="button" data-src="audio/audio-f4.mp3" aria-label="Play audio: Hear Joe on this fundamental">▶</button><span class="alabel">Hear Joe on this fundamental · 0:38</span></div>
   <p class="why">Marketing hands the baton to sales. If that handoff is fumbled, spend leaks out.</p>
   <div class="learn">
     <p>In our audits, this fundamental fails one specific way most often: <b>nothing is documented.</b> No sales flow, no shared buyer definition, no joint review. Alignment isn't a feeling between departments — it's a set of artifacts both sides can point to.</p>
@@ -311,6 +320,7 @@ footer a:hover{text-decoration:underline}
   <div class="ghost">5</div>
   <span class="chip">Fundamental 5</span>
   <h2>Cadence for Planning &amp; Accountability</h2>
+  <div class="audiorow"><button class="audioBtn" type="button" data-src="audio/audio-f5.mp3" aria-label="Play audio: Hear Joe on this fundamental">▶</button><span class="alabel">Hear Joe on this fundamental · 0:49</span></div>
   <p class="why">Strategy dies without rhythm. This is the operating system that keeps marketing accountable.</p>
   <div class="learn">
     <p>Growth is a discipline, not a project — and the discipline runs on two rhythms: <b>quarterly</b> (set the goal, define the Rocks, document the campaign plans) and <b>weekly</b> (scorecard, rock status, issues). Cadence dies in most companies because it's tedious. <span class="c">AI removes the tedium</span> — it pulls the numbers, fills the scorecard, flags anomalies, drafts the update before the meeting.</p>
@@ -348,6 +358,7 @@ footer a:hover{text-decoration:underline}
   <div class="ghost">6</div>
   <span class="chip">Fundamental 6</span>
   <h2>Structured Approach to Advertising</h2>
+  <div class="audiorow"><button class="audioBtn" type="button" data-src="audio/audio-f6.mp3" aria-label="Play audio: Hear Joe on this fundamental">▶</button><span class="alabel">Hear Joe on this fundamental · 0:55</span></div>
   <p class="why">Advertising should be a system you evaluate, not a bill you pay on faith.</p>
   <div class="learn">
     <p>This is where AI changes the <i>most</i> — content, campaigns, and creative are food for AI, and the cost of producing them is collapsing toward zero. Which is exactly why the discipline matters more, not less: <b>automating bad marketing doesn't fix it — it fails faster and louder.</b></p>
@@ -421,6 +432,7 @@ footer a:hover{text-decoration:underline}
 <section class="fund" id="closing">
   <span class="chip warm">Before you go</span>
   <h2>Two honest notes</h2>
+  <div class="audiorow"><button class="audioBtn" type="button" data-src="audio/audio-close.mp3" aria-label="Play audio: Hear Joe — before you go">▶</button><span class="alabel">Hear Joe — before you go · 0:50</span></div>
   <div class="learn">
     <p><b>On AI:</b> everything in this studio made AI your analyst, your researcher, and your production team. None of it made AI your leader. The WIG, the positioning, the name on every number — those stayed with you the whole way through. That was the point. <span class="c">Same foundation. Fundamentally different execution.</span></p>
     <p><b>On leading this alone:</b> this session is the self-guided version of what a yorCMO fractional CMO runs inside companies every week — with the buyer interviews done properly, the systems installed, and the AI tooling already built. If the exposed fundamental you named above feels bigger than a weekend project, that's because it is. It's a CMO-level problem — and now you know which one to solve first.</p>
@@ -636,6 +648,27 @@ footer a:hover{text-decoration:underline}
 
   document.getElementById('copy').addEventListener('click', function(){
     copyText(buildMd(), 'Copied to clipboard');
+  });
+
+  var curA=null, curB=null;
+  function stopAudio(){
+    if(curA){ curA.pause(); curA.currentTime=0; }
+    if(curB){ curB.textContent='\u25b6'; }
+    curA=null; curB=null;
+  }
+  document.querySelectorAll('.audioBtn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(curB===btn){ stopAudio(); return; }
+      stopAudio();
+      if(!btn._audio){
+        btn._audio = new Audio(btn.getAttribute('data-src'));
+        btn._audio.preload = 'none';
+        btn._audio.addEventListener('ended', function(){ if(curB===btn) stopAudio(); });
+      }
+      btn._audio.play();
+      btn.textContent='\u275a\u275a';
+      curA=btn._audio; curB=btn;
+    });
   });
 
   refresh();
