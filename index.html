@@ -79,6 +79,15 @@ details.deeper .inner{padding:2px 18px 18px}
 .audioBtn{width:42px;height:42px;border-radius:50%;border:none;background:var(--warm);color:#fff;font-size:14px;cursor:pointer;flex:0 0 42px;display:flex;align-items:center;justify-content:center}
 .audioBtn:hover{filter:brightness(1.08)}
 .alabel{font-size:14.5px;color:var(--soft);font-weight:600}
+.readcta{background:var(--cool-dim);border-radius:12px;padding:18px;margin-top:14px}
+.readcta p{font-size:16px;color:var(--ink);margin-bottom:12px}
+.readcta p b{color:var(--cool)}
+.readcta a.act{display:inline-block;background:var(--warm);color:#fff;border-radius:10px;padding:12px 18px;font-weight:600;font-size:15px;text-decoration:none}
+.readcta a.act:hover{filter:brightness(1.08)}
+.readcta .sub2{font-size:13.5px;color:var(--muted);margin-top:10px;margin-bottom:0;font-weight:500}
+.clearrow{margin-top:14px}
+.clearbtn{background:none;border:none;color:var(--muted);font-size:13.5px;font-family:inherit;cursor:pointer;text-decoration:underline;padding:0}
+.clearbtn:hover{color:var(--warm)}
 /* exposure */
 #exposure .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:20px 0}
 .pick{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;text-align:left;color:var(--ink);font-family:inherit;font-size:15px;font-weight:500;transition:all .18s ease}
@@ -132,9 +141,9 @@ footer a:hover{text-decoration:underline}
   </svg>
   <div class="audiorow"><button class="audioBtn" type="button" data-src="audio/audio-welcome.mp3" aria-label="Play audio: Hear Joe — start here">▶</button><span class="alabel">Hear Joe — start here · 0:44</span></div>
   <p class="sub"><b style="color:var(--ink)">You are the best marketer your company has.</b> You know the product, the customer, the competitor — that <i>is</i> marketing. If it hasn't worked yet, you didn't fail at it. You were never given a system for it. Just tactics.</p>
-  <p class="sub">This is the system — the six fundamentals yorCMO's fractional CMOs run inside companies every week, turned into a working session you lead yourself. Don't polish; capture what's true right now. Each fundamental teaches, then asks, then builds you a personalized AI prompt from your own answers. If it isn't written down, it doesn't exist — that's the standard a CMO holds. Hold yourself to it for 90 minutes.</p>
+  <p class="sub">This is the system — the six fundamentals yorCMO's fractional CMOs run inside companies every week, turned into a working session you lead yourself. Don't polish; capture what's true right now. Each fundamental teaches, then asks, then builds you a personalized AI prompt from your own answers. If it isn't written down, it doesn't exist — that's the standard a CMO holds. Do it in one 90-minute sitting, or one fundamental at a time — your answers will be here when you come back.</p>
   <div class="howto"><b>How this works:</b> <span class="warm">You</span> answer the questions — that's the foundation, and it stays yours. Then open <span class="warm">"Run this with AI"</span> under each fundamental: your answers are already woven into a ready-to-paste prompt for <span class="cool">ChatGPT, Claude, Gemini, or Copilot</span>. The prompts order the AI to challenge you, not agree with you. Don't remove that part.</div>
-  <p class="byline">Your answers stay on this page until you export them — nothing is uploaded anywhere.</p>
+  <p class="byline">Your answers save privately in this browser, on your device — nothing is uploaded anywhere. Close the tab, come back, pick up where you left off.</p>
 </header>
 
 <section class="fund" id="expectations">
@@ -409,6 +418,11 @@ footer a:hover{text-decoration:underline}
   <div class="q"><label for="x2">What it's really costing me:</label><div class="hint">The strategic problem underneath, not the surface symptom.</div>
     <textarea id="x2" data-k="What it's costing me"></textarea></div>
   <div class="payoff">Fixing this is what turns marketing from a <b>cost center into a value driver</b>. It's a <b>CMO-level problem, not a campaign problem</b> — and now you know which one to solve first.</div>
+  <div class="readcta">
+    <p><b>You just named it.</b> Want us to confirm it from the outside — the way a buyer or an AI engine sees your business?</p>
+    <a class="act" id="readBtn" href="mailto:joseph@yorcmo.com?subject=Complimentary%206%20Fundamentals%20Read%20request">Request my complimentary 6 Fundamentals Read</a>
+    <p class="sub2">Opens an email pre-filled with the exposure you named — nothing sends until you hit send. No pitch attached. It's the most useful 15 minutes we can give you.</p>
+  </div>
 </section>
 
 <details class="gloss">
@@ -441,12 +455,14 @@ footer a:hover{text-decoration:underline}
 
 <div class="actions">
   <h3 class="serif">Take your strategy with you</h3>
-  <p>Your answers live only on this page — export before you close it. The download includes your answers AND your full set of personalized AI prompts.</p>
+  <p>Your answers are saved in this browser — but this browser only. Export to keep them anywhere else. Downloads include your answers AND your full set of personalized AI prompts.</p>
   <div class="btnrow">
-    <button class="act" id="dl">Download strategy + prompts (.md)</button>
+    <button class="act" onclick="window.print()">Save as PDF</button>
+    <button class="act ghosted" id="email">Email me my results</button>
+    <button class="act ghosted" id="dl">Download text file (.md)</button>
     <button class="act ghosted" id="copy">Copy to clipboard</button>
-    <button class="act ghosted" onclick="window.print()">Print / save as PDF</button>
   </div>
+  <div class="clearrow"><button class="clearbtn" id="clearSaved" type="button">Start over — clear my saved answers from this browser</button></div>
 </div>
 
 <footer>
@@ -566,6 +582,7 @@ footer a:hover{text-decoration:underline}
       document.querySelectorAll('.pick').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
       btn.setAttribute('aria-pressed','true');
       exposed = btn.getAttribute('data-f');
+      saveSoon();
     });
   });
 
@@ -650,6 +667,95 @@ footer a:hover{text-decoration:underline}
     copyText(buildMd(), 'Copied to clipboard');
   });
 
+  // ---------- autosave (this browser only) ----------
+  var SKEY = 'sixfun-studio-v1';
+  var storageOK = true;
+  try { localStorage.setItem('__t','1'); localStorage.removeItem('__t'); } catch(e){ storageOK = false; }
+
+  function saveState(){
+    if(!storageOK) return;
+    var data = {fields:{}, exposed: exposed};
+    fields.forEach(function(f){ if(f.value.trim()) data.fields[f.id] = f.value; });
+    try { localStorage.setItem(SKEY, JSON.stringify(data)); } catch(e){}
+  }
+  var saveTimer = null;
+  function saveSoon(){ clearTimeout(saveTimer); saveTimer = setTimeout(saveState, 400); }
+
+  function restoreState(){
+    if(!storageOK) return;
+    var raw = null;
+    try { raw = localStorage.getItem(SKEY); } catch(e){}
+    if(!raw) return;
+    try {
+      var data = JSON.parse(raw);
+      Object.keys(data.fields || {}).forEach(function(id){
+        var el = document.getElementById(id);
+        if(el) el.value = data.fields[id];
+      });
+      if(data.exposed){
+        var btn = document.querySelector('.pick[data-f="' + data.exposed + '"]');
+        if(btn){ btn.setAttribute('aria-pressed','true'); exposed = data.exposed; }
+      }
+    } catch(e){}
+  }
+  fields.forEach(function(f){ f.addEventListener('input', saveSoon); });
+
+  var clearBtn = document.getElementById('clearSaved');
+  if(clearBtn) clearBtn.addEventListener('click', function(){
+    if(!confirm('Clear all saved answers from this browser? Export first if you want to keep them.')) return;
+    try { localStorage.removeItem(SKEY); } catch(e){}
+    fields.forEach(function(f){ f.value=''; });
+    document.querySelectorAll('.pick').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+    exposed = null;
+    refresh();
+    toast('Cleared — fresh start');
+  });
+
+  // ---------- Read CTA: prefill with the named exposure ----------
+  function trunc(t, n){ t = (t||'').trim(); return t.length > n ? t.slice(0, n) + '…' : t; }
+  function readMailto(){
+    var lines = ['I just ran the 6 Fundamentals Strategy Studio.',''];
+    if(has('biz')) lines.push('My business: ' + trunc(v('biz'), 300));
+    if(exposed) lines.push('Most exposed fundamental: Fundamental ' + exposed + ' — ' + FUNDS[exposed]);
+    if(has('x1')) lines.push('Why: ' + trunc(v('x1'), 300));
+    if(has('x2')) lines.push("What it's costing me: " + trunc(v('x2'), 300));
+    lines.push('', "I'd like the complimentary outside Read.");
+    return 'mailto:joseph@yorcmo.com?subject=' + encodeURIComponent('Complimentary 6 Fundamentals Read request') + '&body=' + encodeURIComponent(lines.join('\n'));
+  }
+  var readBtn = document.getElementById('readBtn');
+  if(readBtn) readBtn.addEventListener('click', function(){ readBtn.href = readMailto(); });
+
+  // ---------- Email me my results ----------
+  var emailBtn = document.getElementById('email');
+  if(emailBtn) emailBtn.addEventListener('click', function(){
+    var lines = ['My 6 Fundamentals strategy snapshot — ' + new Date().toLocaleDateString(), ''];
+    if(has('biz')) lines.push('My business: ' + trunc(v('biz'), 250));
+    if(has('f1a')||has('f1b')||has('f1c')) lines.push('2-year WIG: From ' + v('f1a') + ' to ' + v('f1b') + ' by ' + v('f1c'));
+    if(has('f2a')) lines.push('Primary buyer: ' + trunc(v('f2a'), 200));
+    if(has('f2b')) lines.push('Their trigger: ' + trunc(v('f2b'), 200));
+    if(has('f3d')) lines.push('Brand promise: ' + trunc(v('f3d'), 200));
+    if(has('f4f')) lines.push('X-Factor: ' + trunc(v('f4f'), 200));
+    if(has('f5a')) lines.push('Marketing rocks: ' + trunc(v('f5a'), 200));
+    if(exposed) lines.push('Most exposed: Fundamental ' + exposed + ' — ' + FUNDS[exposed]);
+    if(has('x2')) lines.push("What it's costing me: " + trunc(v('x2'), 250));
+    lines.push('', 'This is the summary — the full version with all answers and my six personalized AI prompts is in the downloadable file at the studio.', 'https://omahajoe.github.io/6-fundamentals-studio/');
+    location.href = 'mailto:?subject=' + encodeURIComponent('My 6 Fundamentals strategy') + '&body=' + encodeURIComponent(lines.join('\n'));
+  });
+
+  // ---------- expand textareas for PDF/print so answers don't clip ----------
+  var preHeights = [];
+  window.addEventListener('beforeprint', function(){
+    preHeights = [];
+    document.querySelectorAll('textarea').forEach(function(t){
+      preHeights.push([t, t.style.height]);
+      t.style.height = 'auto';
+      t.style.height = Math.max(t.scrollHeight, 44) + 'px';
+    });
+  });
+  window.addEventListener('afterprint', function(){
+    preHeights.forEach(function(p){ p[0].style.height = p[1]; });
+  });
+
   var curA=null, curB=null;
   function stopAudio(){
     if(curA){ curA.pause(); curA.currentTime=0; }
@@ -671,6 +777,7 @@ footer a:hover{text-decoration:underline}
     });
   });
 
+  restoreState();
   refresh();
 })();
 </script>
