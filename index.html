@@ -124,6 +124,7 @@ footer a:hover{text-decoration:underline}
 }
 @media(max-width:560px){.ghost{font-size:76px;top:2px}}
 </style>
+<script data-goatcounter="https://omahajoe.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 <div id="bar"></div><div id="pct">0%</div>
@@ -143,7 +144,7 @@ footer a:hover{text-decoration:underline}
   <p class="sub"><b style="color:var(--ink)">You are the best marketer your company has.</b> You know the product, the customer, the competitor — that <i>is</i> marketing. If it hasn't worked yet, you didn't fail at it. You were never given a system for it. Just tactics.</p>
   <p class="sub">This is the system — the six fundamentals yorCMO's fractional CMOs run inside companies every week, turned into a working session you lead yourself. Don't polish; capture what's true right now. Each fundamental teaches, then asks, then builds you a personalized AI prompt from your own answers. If it isn't written down, it doesn't exist — that's the standard a CMO holds. Do it in one 90-minute sitting, or one fundamental at a time — your answers will be here when you come back.</p>
   <div class="howto"><b>How this works:</b> <span class="warm">You</span> answer the questions — that's the foundation, and it stays yours. Then open <span class="warm">"Run this with AI"</span> under each fundamental: your answers are already woven into a ready-to-paste prompt for <span class="cool">ChatGPT, Claude, Gemini, or Copilot</span>. The prompts order the AI to challenge you, not agree with you. Don't remove that part.</div>
-  <p class="byline">Your answers save privately in this browser, on your device — nothing is uploaded anywhere. Close the tab, come back, pick up where you left off. One note: private/incognito windows forget everything when they close — use a regular window so your answers persist.</p>
+  <p class="byline">Your answers save privately in this browser, on your device — what you type is never uploaded anywhere. (We count anonymous visits only: no cookies, no identity, nothing you write.) Close the tab, come back, pick up where you left off. One note: private/incognito windows forget everything when they close — use a regular window so your answers persist.</p>
 </header>
 
 <section class="fund" id="expectations">
@@ -462,7 +463,7 @@ footer a:hover{text-decoration:underline}
   <h3 class="serif">Take your strategy with you</h3>
   <p>Your answers are saved in this browser — but this browser only. Export to keep them anywhere else. Downloads include your answers AND your full set of personalized AI prompts.</p>
   <div class="btnrow">
-    <button class="act" onclick="window.print()">Save as PDF</button>
+    <button class="act" id="pdfBtn" type="button">Save as PDF</button>
     <button class="act ghosted" id="email">Email me my results</button>
     <button class="act ghosted" id="dl">Download text file (.md)</button>
     <button class="act ghosted" id="copy">Copy to clipboard</button>
@@ -592,6 +593,7 @@ footer a:hover{text-decoration:underline}
       document.querySelectorAll('.pick').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
       btn.setAttribute('aria-pressed','true');
       exposed = btn.getAttribute('data-f');
+      if(!firedEvents['exposure-pick']){ firedEvents['exposure-pick']=true; track('exposure-pick'); }
       saveSoon();
     });
   });
@@ -664,7 +666,11 @@ footer a:hover{text-decoration:underline}
     return md;
   }
 
+  var pdfBtn = document.getElementById('pdfBtn');
+  if(pdfBtn) pdfBtn.addEventListener('click', function(){ track('export-pdf'); window.print(); });
+
   document.getElementById('dl').addEventListener('click', function(){
+    track('export-md');
     var blob = new Blob([buildMd()], {type:'text/markdown'});
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -674,8 +680,37 @@ footer a:hover{text-decoration:underline}
   });
 
   document.getElementById('copy').addEventListener('click', function(){
+    track('export-copy');
     copyText(buildMd(), 'Copied to clipboard');
   });
+
+  // ---------- anonymous scorecard (GoatCounter: no cookies, no identity) ----------
+  function track(name){
+    try{
+      if(window.goatcounter && window.goatcounter.count)
+        window.goatcounter.count({path:'/' + name, title:name, event:true});
+    }catch(e){}
+  }
+  var FCOMP = {
+    'complete-f1':["f1a","f1b","f1c","f1d","f1e","f1f","f1g","f1h","f1i"],
+    'complete-f2':["f2a","f2b","f2c","f2d","f2e"],
+    'complete-f3':["f3a","f3b","f3c","f3d","f3e","f3f","f3g"],
+    'complete-f4':["f4a","f4b","f4c","f4d","f4e","f4f","f4g"],
+    'complete-f5':["f5a","f5b","f5c","f5d","f5e"],
+    'complete-f6':["f6a","f6b","f6c","f6d","f6e"]
+  };
+  var firedEvents = {};
+  function sectionDone(ids){
+    return ids.every(function(id){ var el=document.getElementById(id); return el && el.value.trim(); });
+  }
+  function checkCompletions(seedOnly){
+    Object.keys(FCOMP).forEach(function(k){
+      if(firedEvents[k]) return;
+      if(sectionDone(FCOMP[k])){ firedEvents[k]=true; if(!seedOnly) track(k); }
+    });
+  }
+  var compTimer=null;
+  function completionSoon(){ clearTimeout(compTimer); compTimer=setTimeout(function(){ checkCompletions(false); }, 800); }
 
   // ---------- autosave (this browser only) ----------
   var SKEY = 'sixfun-studio-v1';
@@ -708,7 +743,7 @@ footer a:hover{text-decoration:underline}
       }
     } catch(e){}
   }
-  fields.forEach(function(f){ f.addEventListener('input', saveSoon); });
+  fields.forEach(function(f){ f.addEventListener('input', saveSoon); f.addEventListener('input', completionSoon); });
 
   var clearBtn = document.getElementById('clearSaved');
   if(clearBtn) clearBtn.addEventListener('click', function(){
@@ -746,6 +781,7 @@ footer a:hover{text-decoration:underline}
   var readBtn = document.getElementById('readBtn');
   if(readBtn) readBtn.addEventListener('click', function(ev){
     ev.preventDefault();
+    track('read-cta');
     var body = readBody();
     var url = 'mailto:joseph@yorcmo.com?subject=' + encodeURIComponent('Complimentary 6 Fundamentals Read request') + '&body=' + encodeURIComponent(body);
     tryMailto(url, function(){
@@ -774,6 +810,7 @@ footer a:hover{text-decoration:underline}
   }
   var emailBtn = document.getElementById('email');
   if(emailBtn) emailBtn.addEventListener('click', function(){
+    track('export-email');
     var subj = 'My 6 Fundamentals strategy — ' + new Date().toLocaleDateString();
     var body = emailBody();
     var url = 'mailto:?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
@@ -822,6 +859,7 @@ footer a:hover{text-decoration:underline}
   });
 
   restoreState();
+  checkCompletions(true);
   refresh();
 })();
 </script>
