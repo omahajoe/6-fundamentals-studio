@@ -88,6 +88,7 @@ details.deeper .inner{padding:2px 18px 18px}
 .clearrow{margin-top:14px}
 .clearbtn{background:none;border:none;color:var(--muted);font-size:13.5px;font-family:inherit;cursor:pointer;text-decoration:underline;padding:0}
 .clearbtn:hover{color:var(--warm)}
+.printval{display:none}
 /* exposure */
 #exposure .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:20px 0}
 .pick{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;text-align:left;color:var(--ink);font-family:inherit;font-size:15px;font-weight:500;transition:all .18s ease}
@@ -119,6 +120,9 @@ footer a:hover{text-decoration:underline}
 @media print{
   body{background:#fff;color:#111}
   #bar,#pct,.actions,footer .read,.diverge,details.deeper,.audiorow,.readcta,.clearrow{display:none}
+  textarea,input[type=text]{display:none !important}
+  .printval{display:block !important; white-space:pre-wrap; background:#fff; border:1px solid var(--line); border-radius:10px; padding:11px 13px; font-size:15px; color:var(--ink); min-height:22px}
+  .promptbox{max-height:none !important; overflow:visible !important}
   textarea,input{border:1px solid #999;color:#111;background:#fff}
   .ghost{display:none}
 }
@@ -478,7 +482,7 @@ footer a:hover{text-decoration:underline}
 
 <footer>
   <div class="read"><b>Want to see your marketing the way a buyer — or an AI engine — sees it?</b><br>
-  Request a complimentary <b>6 Fundamentals Read</b> of your business at <a href="https://yorcmo.com" rel="noopener">yorCMO.com</a>. No pitch attached. It's the most useful 15 minutes we can give you.</div>
+  Request a complimentary <b>6 Fundamentals Read</b> of your business — email <a href="mailto:joseph@yorcmo.com?subject=Complimentary%206%20Fundamentals%20Read%20request" id="footerRead">joseph@yorcmo.com</a>. No pitch attached. It's the most useful 15 minutes we can give you.</div>
   Joe Frost · <a href="https://josephmarkfrost.com" rel="noopener">josephmarkfrost.com</a> · <a href="https://yorcmo.com" rel="noopener">yorCMO.com</a><br>
   © Joe Frost / yorCMO — The 6 Fundamentals of Marketing · Way Better Marketing
 </footer>
@@ -661,7 +665,7 @@ footer a:hover{text-decoration:underline}
       md += "## Prompt " + i + " — " + PT[i] + "\n\n> " + BUILDERS[i]().replace(/\n/g, "\n> ") + "\n\n";
     }
     md += "---\n\nFixing your exposed fundamental is what turns marketing from a cost center into a value driver. It's a CMO-level problem, not a campaign problem.\n\n";
-    md += "Want an outside view? Request a complimentary 6 Fundamentals Read at yorCMO.com\n";
+    md += "Want an outside view? Request a complimentary 6 Fundamentals Read — email joseph@yorcmo.com\n";
     md += "Joe Frost · josephmarkfrost.com · yorCMO.com\n";
     return md;
   }
@@ -805,37 +809,54 @@ footer a:hover{text-decoration:underline}
     if(has('f5a')) lines.push('Marketing rocks: ' + trunc(v('f5a'), 200));
     if(exposed) lines.push('Most exposed: Fundamental ' + exposed + ' — ' + FUNDS[exposed]);
     if(has('x2')) lines.push("What it's costing me: " + trunc(v('x2'), 250));
-    lines.push('', 'This is the summary — the full version with all answers and my six personalized AI prompts is in the downloadable file at the studio.', 'https://omahajoe.github.io/6-fundamentals-studio/');
+    lines.push('', 'Full version: use Save as PDF or Download on the studio page — your answers live only in the browser where you filled them.');
     return lines.join('\n');
+  }
+  function fullAnswersText(){
+    var out = ['My 6 Fundamentals strategy — ' + new Date().toLocaleDateString(), ''];
+    SECTIONS.forEach(function(sec){
+      var any = false, block = [sec.title];
+      sec.ids.forEach(function(id){
+        var el = document.getElementById(id);
+        if(el && el.value.trim()){ any = true; block.push('- ' + (el.getAttribute('data-k')||id) + ': ' + el.value.trim()); }
+      });
+      if(any){ out.push(block.join('\n'), ''); }
+    });
+    if(exposed) out.push('Most exposed: Fundamental ' + exposed + ' — ' + FUNDS[exposed]);
+    return out.join('\n');
   }
   var emailBtn = document.getElementById('email');
   if(emailBtn) emailBtn.addEventListener('click', function(){
     track('export-email');
     var subj = 'My 6 Fundamentals strategy — ' + new Date().toLocaleDateString();
-    var body = emailBody();
-    var url = 'mailto:?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
-    tryMailto(url, function(){
-      showFallback('emailFallback','emailMsg', 'Subject: ' + subj + '\n\n' + body);
-    });
+    var full = fullAnswersText();
+    var fullUrl = 'mailto:?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(full);
+    if(fullUrl.length <= 1800){
+      tryMailto(fullUrl, function(){ showFallback('emailFallback','emailMsg', 'Subject: ' + subj + '\n\n' + full); });
+      return;
+    }
+    // Too long for a mail link: give the complete text in a copy panel — never a lossy link
+    showFallback('emailFallback','emailMsg', 'Subject: ' + subj + '\n\n' + full);
+    toast('Your answers are too detailed for a mail link — copy the complete version below');
   });
   var emailCopy = document.getElementById('emailCopy');
   if(emailCopy) emailCopy.addEventListener('click', function(){
     copyText(document.getElementById('emailMsg').textContent, 'Summary copied — paste into any email');
   });
 
-  // ---------- expand textareas for PDF/print so answers don't clip ----------
-  var preHeights = [];
-  window.addEventListener('beforeprint', function(){
-    preHeights = [];
-    document.querySelectorAll('textarea').forEach(function(t){
-      preHeights.push([t, t.style.height]);
-      t.style.height = 'auto';
-      t.style.height = Math.max(t.scrollHeight, 44) + 'px';
+  // ---------- print-safe mirrors: full answer text in the PDF, never clipped ----------
+  function syncPrintVals(){
+    document.querySelectorAll('textarea, input[type=text]').forEach(function(el){
+      var pv = el.nextElementSibling;
+      if(!pv || !pv.classList || !pv.classList.contains('printval')){
+        pv = document.createElement('div');
+        pv.className = 'printval';
+        el.insertAdjacentElement('afterend', pv);
+      }
+      pv.textContent = el.value;
     });
-  });
-  window.addEventListener('afterprint', function(){
-    preHeights.forEach(function(p){ p[0].style.height = p[1]; });
-  });
+  }
+  window.addEventListener('beforeprint', syncPrintVals);
 
   var curA=null, curB=null;
   function stopAudio(){
